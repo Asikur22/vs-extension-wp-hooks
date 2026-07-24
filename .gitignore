@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Editor
+.vscode/
+
+# Internal docs
+docs/
+
+# Build output (rebuilt via npm run build / vscode:prepublish)
+dist/
+*.map
+out/
+
+# Packaged extensions (local builds only — not committed)
+release/
+*.vsix
+*.vsixmanifest
+
+# VS Code / Cursor test runner
+.vscode-test/
+.vscode-test-web/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+*.iml
+
+# Logs & debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Internal / reference
+assets/icon-source.png
+
+# Optional local notes
+*.local.md
+TODO.local.md

@@ -1,0 +1,120 @@
+{
+  "name": "wp-hooks",
+  "displayName": "WP Hooks",
+  "description": "Go to WP Hook Definition, Hook Hover PHP Docs, Workspace symbols (Cmd/Ctrl+T), and hook suggestions for WordPress actions and filters.",
+  "version": "1.0.0",
+  "license": "GPL-2.0",
+  "author": {
+    "name": "Asiqur Rahman",
+    "email": "asiq.webdev@gmail.com"
+  },
+  "publisher": "asikur22",
+  "icon": "assets/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Asikur22/vs-extension-wp-hooks.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "WordPress",
+    "Other"
+  ],
+  "keywords": [
+    "wordpress",
+    "hooks",
+    "actions",
+    "filters",
+    "navigation",
+    "autocomplete",
+    "workspace symbols"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onLanguage:php",
+    "onCommand:wpHooks.goToHookDefinition",
+    "onCommand:wpHooks.goToCallbackFunction",
+    "onCommand:wpHooks.rescanWorkspace"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "wpHooks.goToHookDefinition",
+        "title": "WP Hooks: Go to Hook Definition"
+      },
+      {
+        "command": "wpHooks.goToCallbackFunction",
+        "title": "WP Hooks: Go to Callback Function"
+      },
+      {
+        "command": "wpHooks.rescanWorkspace",
+        "title": "WP Hooks: Rescan Workspace"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "wpHooks.goToHookDefinition",
+        "key": "f12",
+        "mac": "f12",
+        "when": "editorTextFocus && editorLangId == php && wpHooks.isOnHook && !isInEmbeddedEditor"
+      },
+      {
+        "command": "wpHooks.goToHookDefinition",
+        "key": "ctrl+f12",
+        "mac": "cmd+f12",
+        "when": "editorTextFocus && editorLangId == php && wpHooks.isOnHook && !isInEmbeddedEditor"
+      },
+      {
+        "command": "wpHooks.goToCallbackFunction",
+        "key": "f12",
+        "mac": "f12",
+        "when": "editorTextFocus && editorLangId == php && wpHooks.isOnCallback && !isInEmbeddedEditor"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "wpHooks.goToHookDefinition",
+          "when": "editorLangId == php",
+          "group": "navigation@100"
+        },
+        {
+          "command": "wpHooks.goToCallbackFunction",
+          "when": "editorLangId == php",
+          "group": "navigation@101"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "WP Hooks",
+      "properties": {
+        "wpHooks.externalPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Extra folders outside the workspace to scan for hooks (e.g. WordPress core or other plugins). Used when your open folder is only a theme/plugin and core lives elsewhere."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run esbuild-base -- --minify",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node",
+    "build": "npm run esbuild-base -- --sourcemap",
+    "watch": "npm run esbuild-base -- --sourcemap --watch",
+    "lint": "tsc --noEmit",
+    "package": "npm run build -- --minify",
+    "package:vsix": "npm run package && npx --yes @vscode/vsce package --out release/ --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.11.0",
+    "esbuild": "^0.20.0",
+    "typescript": "^5.3.0"
+  }
+}

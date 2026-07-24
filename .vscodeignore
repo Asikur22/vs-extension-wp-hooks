@@ -1,0 +1,12 @@
+.vscode/**
+.vscode-test/**
+src/**
+node_modules/**
+docs/**
+release/**
+tsconfig.json
+**/*.map
+**/*.ts
+wordpress-hook-navigator-master/**
+.DS_Store
+assets/icon-source.png
